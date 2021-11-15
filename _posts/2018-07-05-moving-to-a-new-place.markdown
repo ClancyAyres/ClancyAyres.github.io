@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Moving to a new place
-date:   2018-07-05 15:01:35 +0300
+date:   2023-05-29 18:05:55 +0300
 image:  05.jpg
 tags:   Home
 ---

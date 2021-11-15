@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Find a connection with the reader
-date:   2018-07-24 15:01:35 +0300
+date:   2023-05-29 18:05:55 +0300
 image:  02.jpg
 tags:   Resources
 ---

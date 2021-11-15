@@ -1,5 +1,6 @@
 <div class="contact">
   <ul class="contact__list list-reset">
+
     {% if site.data.settings.twitter %}
       <li><a href="{{ site.data.settings.twitter }}"><i class="ion ion-logo-twitter"></i></a></li>
     {% else %} {% endif %}
@@ -19,5 +20,10 @@
     {% if site.data.settings.pinterest %}
       <li><a href="{{ site.data.settings.pinterest }}"><i class="ion ion-logo-pinterest"></i></a></li>
     {% else %} {% endif %}
+
+    {% if site.data.settings.bilibili %}
+      <li><a href="{{ site.data.settings.bilibili }}"><i class="ion ion-logo-bilibili"></i></a></li>
+    {% else %} {% endif %}
+
   </ul>
 </div>
