@@ -1,0 +1,32 @@
+---
+layout: post
+title:  Git 使用方法 (已经修改但存放在暂存区没有push)
+date:   2021-11-15 16:03:35 -10000
+image:  Git/001.jpg
+tags:   Git
+---
+
+# 今天分享一下我在Git的使用中遇到的问题:
+* 已经在本地修改好了文件和代码, git push以后发现没有上传成功的问题
+
+* __首先我们可以使用 git statues 实时查看git的一个状态信息__
+
+    此时我们发现 : 不管是之前本地deleted的文件还是最新create的文件都是 __"红色状态"__
+![]({{ site.baseurl }}/images/Git/001.jpg)
+
+* 此时我们按照上面的tips
+    __使用 git add . / git commit -a 对这些 红色状态的未跟踪信息进行跟踪__ 
+    
+    (use "git add/rm <file>..." to update what will be committed)
+
+![]({{ site.baseurl }}/images/Git/002.jpg)
+    此时发现已经变成了 __绿色的跟踪状态__
+
+  此时若使用 __git restore__ 又会回到之前的不被跟踪的暂存状态
+
+  (use "git restore <file>..." to discard changes in working directory)
+
+![]({{ site.baseurl }}/images/Git/003.jpg)
+
+* __此时就需要 git commit -m "一个新的commit", 然后 git push origin master 就可以完成上传__
+![]({{ site.baseurl }}/images/Git/004.jpg)
