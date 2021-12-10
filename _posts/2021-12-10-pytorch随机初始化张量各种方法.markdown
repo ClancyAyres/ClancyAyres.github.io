@@ -3,7 +3,7 @@ layout: post
 title:  python/pytorch随机初始化张量的方法总结
 date:   2021-12-10 8:01:35 -10000
 image:  002.png
-tags:   Life
+tags:   Python
 ---
 
 # 今天来个大家(主要是方便我直接CV)介绍点初始化Tensor的方法, 方便大家摸鱼(bushi
