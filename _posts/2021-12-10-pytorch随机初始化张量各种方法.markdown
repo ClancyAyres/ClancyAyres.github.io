@@ -1,0 +1,98 @@
+---
+layout: post
+title:  python/pytorch随机初始化张量的方法总结
+date:   2021-12-10 8:01:35 -10000
+image:  002.png
+tags:   Life
+---
+
+# 今天来个大家(主要是方便我直接CV)介绍点初始化Tensor的方法, 方便大家摸鱼(bushi
+
+__不多逼逼,直接开造__
+
+# 基础篇(linspace(), rand(), randn(), normal())
+
+__线性间距 : torch.linspace(size, end, steps=100, out = None)__
+
+{% highlight js %}
+    notice : torch.arange()用法相同, 也能起到相同的作用
+
+    -> 无梯度版本
+    x = torch.linspace(0, 10, 5)
+
+    -> 有梯度版本
+    x = torch.linspace(0, 10, 5,requires_grad=True)
+    
+    -> 一般作为神经网络的input都需要生维度
+    x = torch.unsqueeze(torch.linspace(0, 10, 5,requires_grad=True), dim = 0)
+
+    result : 
+            tensor([ 0.0000,  2.5000,  5.0000,  7.5000, 10.0000], requires_grad=True)
+    size : 
+            torch.Size([5])
+{% endhighlight %}
+
+__均匀分布 : torch.rand(sizes, out=None)__
+
+{% highlight js %}
+返回一个张量,包含了从区间[0, 1)的均匀分布中抽取的一组随机数.
+
+    -> 无梯度版本
+    x = torch.rand(2, 3)
+
+    -> 有梯度版本
+    x = torch.rand(2, 3 ,requires_grad=True)
+
+    result : 
+            tensor([ [0.7246, 0.3848, 0.9174],
+                          [0.5294, 0.6160, 0.2872] ],requires_grad=True) 
+    size: 
+            torch.Size([2, 3])
+{% endhighlight %}
+
+__标准&离散正态分布 : torch.randn(sizes, out=None)/torch.normal(means, std, out=None)__
+
+{% highlight js %}
+randn()   : 返回一个张量,包含了从标准正态分布(均值为0,方差为1,即高斯白噪声)中抽取的一组随机数
+normal() : 包含了从指定均值means和标准差std的离散正态分布中抽取的一组随机数
+                notice: 标准差std是一个张量,包含每个输出元素相关的正态分布标准差.
+    
+    -> 标准正态分布的两个版本
+        x = torch.randn(2, 3)
+        x = torch.randn(2, 3 ,requires_grad=True)
+    
+    -> 离散正态分布的两个版本
+        x = torch.normal(mean=0.5, std=torch.arange(1, 6))
+        x = torch.normal(mean=0.5, std=torch.arange(1, 6), requires_grad=True)
+{% endhighlight %}
+
+# 进阶篇(直接生成需要的张量)
+
+__1. 生成一个任意范围内的随机数的张量__
+
+{% highlight js %}
+    => 1. range in [0.0, 1.0):
+        ->a.通用款
+            size_x = 2
+            size_y = 3
+            x = torch.from_numpy(np.random.random((size_x, size_y))).to(torch.float32)
+
+        ->b.基本版:
+            x = torch.from_numpy(np.random.random((2,3)))
+    
+        ->c.降低精度 : 
+            x = torch.from_numpy(np.random.random((2,3))).to(torch.float32)
+        result : 
+            tensor([[0.2771, 0.5948, 0.3317],
+                        [0.4145, 0.1179, 0.2261]], dtype=torch.float32)
+    
+    => 2. range in [min, max):
+        ->a.通用款
+            size_x, size_y = 2 , 3
+            min = 0
+            max = 1
+            x = torch.from_numpy(min+(max-min)*np.random.random((size_x, size_y))).to(torch.float32)
+
+
+
+{% endhighlight %}
